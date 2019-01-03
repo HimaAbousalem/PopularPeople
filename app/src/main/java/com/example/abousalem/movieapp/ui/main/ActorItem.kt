@@ -8,14 +8,14 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.actor_recycler_row.view.*
 import javax.inject.Inject
 
-class ActorItem @Inject constructor(val actors: List<Actor>, val picasso: Picasso): Item<ViewHolder>(){
+class ActorItem @Inject constructor(val actor: Actor, val picasso: Picasso): Item<ViewHolder>(){
     override fun getLayout(): Int {
         return R.layout.actor_recycler_row
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.actor_name_recycler.text = actors[position].actorName
-        picasso.load(actors[position].actorProfilePic).into(viewHolder.itemView.actor_image_recycler)
+        viewHolder.itemView.actor_name_recycler.text = actor.actorName
+        picasso.load(actor.actorProfilePic).into(viewHolder.itemView.actor_image_recycler)
     }
 
 }
