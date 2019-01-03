@@ -34,7 +34,6 @@ open class BaseActivity: AppCompatActivity(), BaseMvpView{
         return mActivitiesComponent
     }
     override fun showLoading() {
-        hideloading()
         mDialoge.showDialog()
     }
 

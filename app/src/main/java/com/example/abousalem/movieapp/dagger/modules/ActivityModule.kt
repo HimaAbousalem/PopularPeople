@@ -2,6 +2,7 @@ package com.example.abousalem.movieapp.dagger.modules
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.abousalem.movieapp.dagger.ActivityContext
 import com.example.abousalem.movieapp.dagger.ActivityScope
@@ -39,8 +40,8 @@ class ActivityModule{
     }
 
     @Provides
-    fun provideLinearLayoutManager(activity: AppCompatActivity): LinearLayoutManager {
-        return LinearLayoutManager(activity)
+    fun provideGridLayoutManager(activity: AppCompatActivity): GridLayoutManager {
+        return GridLayoutManager(activity,2)
     }
 
     @ActivityScope

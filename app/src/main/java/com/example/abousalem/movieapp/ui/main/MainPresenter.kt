@@ -18,19 +18,19 @@ class MainPresenter<V:MainMvpView>: BasePresenter<V>, MainMvpPresenter<V>{
         mCompositeDisposable
     )
     override fun loadPopularPeople() {
+        getBaseMvpView().showLoading()
+        getCompositeDisposable().add(
         getDataManager().getPopularPeople()
             .subscribeOn(Schedulers.io())
-            .doOnNext { getBaseMvpView().showLoading() }
             .map{actors -> actors.moviesResult}
             .flatMap {Observable.fromIterable(it) }
             .map { actor->
                 actor.actorProfilePic = Constants.BASE_IMAGE_URL + actor.actorProfilePic
-                return@map actor}
-            .doOnNext { getBaseMvpView().hideloading() }
+                return@map actor }
             .toList()
             .observeOn(AndroidSchedulers. mainThread())
-            .subscribe {it ->getBaseMvpView().populateAdapter(it)  }
-
+            .subscribe {it ->getBaseMvpView().populateAdapter(it)
+            getBaseMvpView().hideloading()})
     }
 
 }

@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.my_custom_dialoge.*
 class DialogView(var activity: Activity){
 
     var dialog: Dialog? =null
-
     fun showDialog() {
         dialog = Dialog(activity)
         dialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
