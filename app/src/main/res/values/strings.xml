@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MovieApp</string>
+
+    <!--errors-->
+    <string name="some_error">Some Error Occurred!</string>
+    <string name="title_actor_list">Actors</string>
+    <string name="title_actor_detail">Actor Detail</string>
+</resources>
