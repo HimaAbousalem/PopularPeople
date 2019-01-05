@@ -8,8 +8,6 @@ import kotlinx.android.parcel.Parcelize
 data class Actor(
     @SerializedName("id")
     val id: Long,
-    @SerializedName("popularity")
-    val actorPopularity: Double,
     @SerializedName("profile_path")
     var actorProfilePic: String,
     @SerializedName("name")
@@ -17,5 +15,5 @@ data class Actor(
     @SerializedName("known_for")
     val knownFor: ArrayList<Movie>
 ) : Parcelable{
-    constructor():this(0,0.0,"","",ArrayList<Movie>())
+    constructor():this(0,"","",ArrayList<Movie>())
 }

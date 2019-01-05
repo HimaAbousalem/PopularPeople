@@ -37,6 +37,7 @@ class NetworkModule{
         val logging = HttpLoggingInterceptor{ message -> Timber.d(message)  }
         return logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
 
+
     }
 
 }

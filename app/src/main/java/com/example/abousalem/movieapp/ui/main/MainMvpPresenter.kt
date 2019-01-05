@@ -5,5 +5,6 @@ import com.example.abousalem.movieapp.ui.base.BaseMvpPresenter
 interface  MainMvpPresenter<V: MainMvpView>: BaseMvpPresenter<V>{
 
     fun loadPopularPeople()
+   // fun checkInternetConnectivity()
 
 }

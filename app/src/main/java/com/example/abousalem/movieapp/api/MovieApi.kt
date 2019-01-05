@@ -1,5 +1,6 @@
 package com.example.abousalem.movieapp.api
 
+import com.example.abousalem.movieapp.data.model.ActorDetails
 import com.example.abousalem.movieapp.data.model.MoviesRequest
 import com.example.abousalem.movieapp.data.model.PicturesRequest
 import io.reactivex.Observable
@@ -23,5 +24,9 @@ interface MovieApi{
 
   @GET("/person/{id}/images")
   fun getActorImages(@Path("id")actorId: Long,
-                     @Query("api_key") api_key: String):Single<PicturesRequest>
+                     @Query("api_key") api_key: String):Observable<PicturesRequest>
+
+    @GET("/person/{person_id}")
+    fun getActorDetails(@Path("person_id")actorId: Long,
+                        @Query("api_key")api_key: String): Observable<ActorDetails>
 }

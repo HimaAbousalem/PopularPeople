@@ -7,7 +7,9 @@ import com.example.abousalem.movieapp.api.MovieApi
 import com.example.abousalem.movieapp.dagger.components.DaggerMovieAppComponent
 import com.example.abousalem.movieapp.dagger.components.MovieAppComponent
 import com.example.abousalem.movieapp.dagger.modules.AppModule
+import com.github.pwittchen.reactivenetwork.library.rx2.Connectivity
 import com.squareup.picasso.Picasso
+import io.reactivex.Observable
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -17,6 +19,8 @@ class MovieApp : Application(){
     lateinit var picasso: Picasso
     @Inject
     lateinit var movieApiService: MovieApi
+    @Inject
+    lateinit var reactiveNetwork: Observable<Connectivity>
 
     private lateinit var component: MovieAppComponent
 
@@ -27,7 +31,6 @@ class MovieApp : Application(){
     }
     override fun onCreate() {
         super.onCreate()
-
         Timber.plant(Timber.DebugTree())
         component = DaggerMovieAppComponent.builder()
             .appModule(AppModule(this))
@@ -39,6 +42,7 @@ class MovieApp : Application(){
     fun getApplicationComponent(): MovieAppComponent {
         return component
     }
+
     fun getPicassoObj():Picasso{
         return picasso
     }
