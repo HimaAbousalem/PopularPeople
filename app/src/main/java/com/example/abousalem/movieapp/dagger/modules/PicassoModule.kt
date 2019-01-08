@@ -17,7 +17,6 @@ class PicassoModule{
     fun getPicasso(@ApplicationContext context: Context, okHttp3Downloader: OkHttp3Downloader): Picasso{
         return Picasso.Builder(context)
             .downloader(okHttp3Downloader)
-
             .build()
     }
 

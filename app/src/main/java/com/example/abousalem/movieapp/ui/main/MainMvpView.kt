@@ -7,6 +7,6 @@ import com.xwray.groupie.ViewHolder
 
 interface MainMvpView: BaseMvpView{
     //declare Main View Methods
-    fun populateAdapter(actors: List<Actor>)
+    fun populateAdapter(actor: Actor)
     fun openDetailsActivity(item: Item<ViewHolder>)
 }

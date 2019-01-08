@@ -6,6 +6,7 @@ import com.example.abousalem.movieapp.ui.base.BasePresenter
 import com.example.abousalem.movieapp.util.Constants
 import com.github.pwittchen.reactivenetwork.library.rx2.Connectivity
 import com.github.pwittchen.reactivenetwork.library.rx2.ConnectivityPredicate
+import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -23,20 +24,26 @@ class MainPresenter<V:MainMvpView>: BasePresenter<V>, MainMvpPresenter<V> {
     @Inject
     lateinit var reactiveNetwork: Observable<Connectivity>
 
-    override fun loadPopularPeople() {
+    override fun checkInternet(){
         getCompositeDisposable().add(reactiveNetwork
-            .filter(ConnectivityPredicate.hasState(NetworkInfo.State.CONNECTED))
-            .flatMap { getDataManager().getPopularPeople() }
+            .flatMapSingle{ReactiveNetwork.checkInternetConnectivity()}
             .subscribeOn(Schedulers.io())
-            .map {
-                    actors -> actors.moviesResult }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe{isConnected ->
+                if(isConnected)
+                    loadPopularPeople()
+                else
+                    getBaseMvpView().onError("Sorry there is No Internet!!")
+            })
+    }
+     private fun loadPopularPeople() {
+        getCompositeDisposable().add(getDataManager().getPopularPeople()
+            .subscribeOn(Schedulers.io())
+            .map {actors -> actors.moviesResult }
             .flatMap { Observable.fromIterable(it) }
-         /*   .map {
-                    actor ->
+            .map { actor ->
                 actor.actorProfilePic = Constants.BASE_IMAGE_URL + actor.actorProfilePic
-
-            }*/
-            .toList()
+                return@map actor }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { it ->
                 getBaseMvpView().populateAdapter(it)
@@ -44,18 +51,4 @@ class MainPresenter<V:MainMvpView>: BasePresenter<V>, MainMvpPresenter<V> {
             })
     }
 }
-    /*override fun loadPopularPeople(){
-        getBaseMvpView().showLoading()
-        getCompositeDisposable().add(
-            getDataManager().getPopularPeople()
-                .subscribeOn(Schedulers.io())
-                .map{actors -> actors.moviesResult}
-                .flatMapS {Observable.fromIterable(it) }
-                .map { actor->
-                    actor.actorProfilePic = Constants.BASE_IMAGE_URL + actor.actorProfilePic
-                    return@map actor }
-                .toList()
-                .observeOn(AndroidSchedulers. mainThread())
-                .subscribe {it ->getBaseMvpView().populateAdapter(it)
-                    getBaseMvpView().hideloading()})
-    }*/
+

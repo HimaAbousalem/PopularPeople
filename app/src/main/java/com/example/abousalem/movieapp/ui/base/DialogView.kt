@@ -13,6 +13,7 @@ class DialogView(var activity: Activity){
     var dialog: Dialog? =null
     fun showDialog() {
         dialog = Dialog(activity)
+        if(dialog==null) return
         dialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog!!.setCancelable(false)
         dialog!!.setContentView(R.layout.my_custom_dialoge)
@@ -28,7 +29,9 @@ class DialogView(var activity: Activity){
     }
 
     fun hideDialog() {
-        dialog!!.dismiss()
+        if(dialog!=null) {
+            dialog?.dismiss()
+        }
     }
 
 }

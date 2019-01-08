@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.abousalem.movieapp.R
 import com.example.abousalem.movieapp.data.model.Actor
 import com.example.abousalem.movieapp.ui.base.BaseActivity
+import com.example.abousalem.movieapp.ui.detail.DetailsActivity
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
@@ -31,26 +32,24 @@ class MainActivity : BaseActivity(), MainMvpView {
         setContentView(R.layout.activity_main)
         getActivityComponent().inject(this)
         mPresenter.onAttach(this)
+        //mPresenter.loadPopularPeople()
+        mPresenter.checkInternet()
         actors_recycler.layoutManager = gridLayoutManager
         actors_recycler.adapter = groupieAdapter
-        mPresenter.loadPopularPeople()
         groupieAdapter.setOnItemClickListener { item, _ ->
             this.openDetailsActivity(item)
         }
     }
-    override fun populateAdapter(actors: List<Actor>) {
-        if (actors.isEmpty()){
-            Toast.makeText(this, "NO DATA HERE !!", Toast.LENGTH_SHORT).show()
-            return
-        }
-        Toast.makeText(this, "there is data!!", Toast.LENGTH_SHORT).show()
-        actors.forEach {
-            groupieAdapter.add(ActorItem(it,picasso))
-        }
+
+    override fun populateAdapter(actor: Actor) {
+            groupieAdapter.add(ActorItem(actor,picasso))
+
     }
+
     override fun openDetailsActivity(item: Item<ViewHolder>) {
-
+        val intent = DetailsActivity.startIntent(this)
+        val data = item as ActorItem
+        intent.putExtra("Actor", data.actor)
+        startActivity(intent)
     }
-
-
 }
