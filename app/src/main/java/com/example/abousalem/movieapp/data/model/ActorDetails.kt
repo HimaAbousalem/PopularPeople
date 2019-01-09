@@ -13,6 +13,7 @@ data class ActorDetails(
     val placeOfBirth: String,
     val popularity: Double,
     @SerializedName("profile_path")
-    val profilePic: String,
-    val name: String
+    var profilePic: String,
+    val name: String,
+    val biography: String
 )

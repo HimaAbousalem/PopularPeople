@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.abousalem.movieapp.dagger.ActivityContext
 import com.example.abousalem.movieapp.dagger.ActivityScope
+import com.example.abousalem.movieapp.ui.detail.DetailsMvpPresenter
+import com.example.abousalem.movieapp.ui.detail.DetailsMvpView
+import com.example.abousalem.movieapp.ui.detail.DetailsPresenter
 import com.example.abousalem.movieapp.ui.main.MainMvpPresenter
 import com.example.abousalem.movieapp.ui.main.MainMvpView
 import com.example.abousalem.movieapp.ui.main.MainPresenter
@@ -47,6 +50,12 @@ class ActivityModule{
     @ActivityScope
     @Provides
     fun provideMainPresenter(mPresenter: MainPresenter<MainMvpView>): MainMvpPresenter<MainMvpView> {
+        return mPresenter
+    }
+
+    @ActivityScope
+    @Provides
+    fun provideDetailsPresenter(mPresenter: DetailsPresenter<DetailsMvpView>): DetailsMvpPresenter<DetailsMvpView>{
         return mPresenter
     }
 

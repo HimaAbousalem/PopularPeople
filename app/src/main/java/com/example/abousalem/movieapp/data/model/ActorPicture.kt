@@ -9,7 +9,7 @@ data class ActorPicture(
     @SerializedName("height")
     val height: Int,
     @SerializedName("file_path")
-    val file_path: String,
+    var file_path: String,
     @SerializedName("aspect_ratio")
     val aspect_ratio:Double
 )

@@ -22,11 +22,11 @@ interface MovieApi{
   fun getPopularPeople(@Query("api_key") api_key: String,
                        @Query("page")page: Int):Observable<MoviesRequest>
 
-  @GET("/person/{id}/images")
+  @GET("person/{id}/images")
   fun getActorImages(@Path("id")actorId: Long,
                      @Query("api_key") api_key: String):Observable<PicturesRequest>
 
-    @GET("/person/{person_id}")
+    @GET("person/{person_id}")
     fun getActorDetails(@Path("person_id")actorId: Long,
                         @Query("api_key")api_key: String): Observable<ActorDetails>
 }
