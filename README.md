@@ -1,5 +1,5 @@
 # PopularPeople
-This app was built for studying purpose.it helps you find popular people.
+This app was built for studying purpose. it helps you find popular people.
 
 ### This App built using
 Kotlin <br />
